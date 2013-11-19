@@ -21,7 +21,8 @@ import (
     "net/http"
 )
 
-type withCookie interface {
+// WithCookie is usually a http.Request or http.Response.
+type WithCookie interface {
     Cookies() []*http.Cookie
 }
 
@@ -156,8 +157,10 @@ func SetSecureCookie(w http.ResponseWriter, secret string, c *http.Cookie) {
 
 // GetSecureCookie returns the named cookie provided in the response or ErrNoCookie if not found,
 // or error if secure cookie value cannot be decoded.
-// Secret should be a long, random sequence of bytes
-func GetSecureCookie(r withCookie, secret, name string) (*http.Cookie, error) {
+// r is usually a http.Request if you're in an handler or http.Response if you're dealing
+// with http.Get client response;
+// secret should be a long, random sequence of bytes
+func GetSecureCookie(r WithCookie, secret, name string) (*http.Cookie, error) {
     var c *http.Cookie
 
     for _, x := range r.Cookies() {

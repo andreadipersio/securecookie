@@ -4,6 +4,8 @@
 
 securecookie provide a go implementation of tornado (2.4) secure cookies.
 
+[![GoDoc](https://godoc.org/github.com/andreadipersio/securecookie?status.png)](http://godoc.org/github.com/andreadipersio/securecookie)
+
 ## Usage
 
 #### func  CreateSignedValue
@@ -51,3 +53,4 @@ strings (unlike regular cookies)
 func SignCookie(c *http.Cookie, secret string)
 ```
 SignCookie replace Value of cookie c with a signed string
+
